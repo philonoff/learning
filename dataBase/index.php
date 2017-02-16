@@ -27,7 +27,7 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 //    echo $row['name'] . "<br>";
 //}
 
-$levelId = $_POST['level'];
+//$levelId = $_POST['level'];
 //$sql = "SELECT name FROM region_stage_1 WHERE school_class = ?";
 //$stmt->execute(array($school_class));
 //$sql = "SELECT name FROM region_stage_1 WHERE school_class = :school_class";
