@@ -20,5 +20,6 @@ $opt = array(
 );
 
 $pdo = new PDO($dsn, $user, $pass, $opt);
+//comment
 
 ?>
