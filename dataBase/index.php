@@ -21,5 +21,9 @@ $opt = array(
 
 $pdo = new PDO($dsn, $user, $pass, $opt);
 
+$stmt = $pdo->query("SELECT name FROM region_stage_1");
+while ($row = $stmt->fetch()) {
+    echo $row['name'] . "<br>";
+}
 
 ?>
