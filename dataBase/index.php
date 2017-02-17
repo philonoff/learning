@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 $host = "localhost";
@@ -27,18 +27,20 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 //    echo $row['name'] . "<br>";
 //}
 
-//$levelId = $_POST['level'];
-//$sql = "SELECT name FROM region_stage_1 WHERE school_class = ?";
-//$stmt->execute(array($school_class));
-//$sql = "SELECT name FROM region_stage_1 WHERE school_class = :school_class";
-
-//$stmt = $pdo->prepare("SELECT name,surname,sex,school_class FROM region_stage_1 WHERE level_id = ?");
-//$stmt->execute(array($levelId));
-//foreach ($stmt as $value) {
-//    echo "<pre>";
-//    print_r($value);
-//    echo "</pre>";
+//Позиционный плейсхолдер
+//$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = ?');
+//$stmt->execute(array($_POST['level']));
+//foreach ($stmt as $row) {
+//    echo $row['name'] . "</br>";
 //}
+
+//Именованный плейсхолдер
+//$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = :level_id');
+//$stmt->execute(array('level_id' => $_POST['level']));
+//foreach ($stmt as $row) {
+//    echo $row['name'] . "</br>";
+//}
+
 
 
 ?>
