@@ -54,7 +54,7 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 //    echo $row->name . "<br>";
 //}
 
-//fetchColumn() используем, если запрашиваем только одно полеz
+//fetchColumn() используем, если запрашиваем только одно поле
 //$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE id = :id');
 //$stmt->execute(array('id' => $_POST['id']));
 //$name = $stmt->fetchColumn();
