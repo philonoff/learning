@@ -77,3 +77,9 @@ body {
         border-bottom: 0;
     }
 }
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background-color: rgb(96, 130, 187);!important
+}
