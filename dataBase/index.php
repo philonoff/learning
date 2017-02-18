@@ -30,7 +30,7 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 //для статических запросов query()
 $stmt = $pdo->query("SELECT name FROM region_stage_1");
 while ($row = $stmt->fetch()) {
-    printr($row) . "<br>";
+    echo $row['name'] . "<br>";
 }
 
 //Позиционный плейсхолдер
