@@ -19,8 +19,6 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 
 $id = $_GET['id'];
 
-//$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = :level_id');
-//$stmt->execute(array('level_id' => $_POST['level']));
 $stmt = $pdo->prepare('DELETE FROM news_list WHERE id = ?');
 $stmt->execute(array($id));
 header('Location: index.php?msg=Новость удалена&flag=del');

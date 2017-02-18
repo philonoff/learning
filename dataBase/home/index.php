@@ -62,7 +62,7 @@ $stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publica
                     echo "<thead><tr><th colspan='3'><h3>Новости</h3></th></tr></thead>";
                     while ($row = $stmt->fetch()) {
                         $result = "<tr>";
-                        $result .= "<td width='85%'><a href='#'>{$row['title']}</a></td>";
+                        $result .= "<td width='85%'><a href='fullview.php?id={$row['id']}'>{$row['title']}</a></td>";
                         $result .= "<td><a class='btn btn-default btn-sm' href='editnews.php?id={$row['id']}'>Редактировать</a></td>";
                         $result .= "<td><a class='btn btn-default btn-sm btn btn-danger' href='deletenews.php?id={$row['id']}'>Удалить</a></td>";
                         $result .= "</tr>";
