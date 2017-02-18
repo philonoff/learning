@@ -1,7 +1,7 @@
 <?php
 
 $host = "localhost";
-$db = "date";
+$db = "News";
 $charset = "UTF8";
 $user = "root";
 $pass = "";
@@ -17,7 +17,7 @@ $opt = array(
 
 $pdo = new PDO($dsn, $user, $pass, $opt);
 
-$stmt = $pdo->query("SELECT id, name, surname FROM region_stage_1");
+$stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publication_date DESC");
 
 ?>
 
@@ -39,24 +39,30 @@ $stmt = $pdo->query("SELECT id, name, surname FROM region_stage_1");
 <div class="container">
     <div class="header clearfix">
         <nav>
-            <ul class="nav nav-pills pull-right">
+            <ul class="nav nav-pills pull-left">
                 <li role="presentation" class="active"><a href="index.php">Главная</a></li>
-                <li role="presentation"><a href="#">Добавить новость</a></li>
+                <li role="presentation"><a href="addnews.php">Добавить новость</a></li>
             </ul>
         </nav>
-        <h3 class="text-muted">Новости</h3>
     </div>
 
     <div class="row marketing">
+        <?php
+            if (isset($_GET['msg'])) {
+                echo "<div class='btn-lg bg-success'>{$_GET['msg']}</div>";
+            }
+        ?>
         <div class="col-lg-12">
             <table class="table table-hover">
                 <?php
                     $colcount = $stmt->rowCount();
                     if ($colcount > 0) {
+                        echo "<thead><tr><th colspan='3'><h3>Новости</h3></th></tr></thead>";
                         while ($row = $stmt->fetch()) {
                             $result = "<tr>";
-                            $result .= "<td width='85%'>" . $row['name'] . " " . $row['surname'] . "</td>";
+                            $result .= "<td width='85%'>{$row['title']}</td>";
                             $result .= "<td><a class='btn btn-default btn-sm' href='editnews.php?id={$row['id']}'>Редактировать</a></td>";
+                            $result .= "<td><a class='btn btn-default btn-sm btn btn-danger' href='editnews.php?id={$row['id']}'>Удалить</a></td>";
                             $result .= "</tr>";
                             echo $result;
                         }
