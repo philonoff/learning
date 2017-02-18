@@ -27,7 +27,7 @@ $stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publica
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>News</title>
+    <title>Новости</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -47,28 +47,30 @@ $stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publica
     </div>
 
     <div class="row marketing">
-        <?php
-            if (isset($_GET['msg'])) {
-                echo "<div class='btn-lg bg-success'>{$_GET['msg']}</div>";
-            }
-        ?>
         <div class="col-lg-12">
+            <?php
+            if (isset($_GET['msg']) && $_GET['flag'] === "added") {
+                echo "<div class='btn-lg bg-success'>{$_GET['msg']}</div>";
+            } elseif(isset($_GET['msg']) && $_GET['flag'] === "del") {
+                echo "<div class='btn-lg bg-danger'>{$_GET['msg']}</div>";
+            }
+            ?>
             <table class="table table-hover">
                 <?php
-                    $colcount = $stmt->rowCount();
-                    if ($colcount > 0) {
-                        echo "<thead><tr><th colspan='3'><h3>Новости</h3></th></tr></thead>";
-                        while ($row = $stmt->fetch()) {
-                            $result = "<tr>";
-                            $result .= "<td width='85%'>{$row['title']}</td>";
-                            $result .= "<td><a class='btn btn-default btn-sm' href='editnews.php?id={$row['id']}'>Редактировать</a></td>";
-                            $result .= "<td><a class='btn btn-default btn-sm btn btn-danger' href='editnews.php?id={$row['id']}'>Удалить</a></td>";
-                            $result .= "</tr>";
-                            echo $result;
-                        }
-                    } else {
-                        echo "<h4>Пока нет ни одной новости</h4>";
+                $colcount = $stmt->rowCount();
+                if ($colcount > 0) {
+                    echo "<thead><tr><th colspan='3'><h3>Новости</h3></th></tr></thead>";
+                    while ($row = $stmt->fetch()) {
+                        $result = "<tr>";
+                        $result .= "<td width='85%'><a href='#'>{$row['title']}</a></td>";
+                        $result .= "<td><a class='btn btn-default btn-sm' href='editnews.php?id={$row['id']}'>Редактировать</a></td>";
+                        $result .= "<td><a class='btn btn-default btn-sm btn btn-danger' href='deletenews.php?id={$row['id']}'>Удалить</a></td>";
+                        $result .= "</tr>";
+                        echo $result;
                     }
+                } else {
+                    echo "<h4>Пока нет ни одной новости</h4>";
+                }
                 ?>
             </table>
         </div>
