@@ -28,10 +28,10 @@ $opt = array(
 $pdo = new PDO($dsn, $user, $pass, $opt);
 
 //для статических запросов query()
-$stmt = $pdo->query("SELECT name FROM region_stage_1");
-while ($row = $stmt->fetch()) {
-    echo $row['name'] . "<br>";
-}
+//$stmt = $pdo->query("SELECT name FROM region_stage_1");
+//while ($row = $stmt->fetch()) {
+//    echo $row['name'] . "<br>";
+//}
 
 //Позиционный плейсхолдер
 //$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = ?');
@@ -40,6 +40,11 @@ while ($row = $stmt->fetch()) {
 //    echo $row['name'] . "</br>";
 //}
 
+$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = ?');
+$stmt->execute(array($_POST['level']));
+foreach ($stmt as $row) {
+    printr($row) . "<br>";
+}
 //Именованный плейсхолдер
 //$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = :level_id');
 //$stmt->execute(array('level_id' => $_POST['level']));
@@ -80,7 +85,7 @@ while ($row = $stmt->fetch()) {
 //printr($data);
 ?>
 
-<!--<form action="" method="POST">-->
-<!--    <input type="text" name="level">-->
-<!--    <input type="submit" name="submit">-->
-<!--</form>-->
+<form action="" method="POST">
+    <input type="text" name="level">
+    <input type="submit" name="submit">
+</form>
