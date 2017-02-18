@@ -40,11 +40,6 @@ $pdo = new PDO($dsn, $user, $pass, $opt);
 //    echo $row['name'] . "</br>";
 //}
 
-$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = ?');
-$stmt->execute(array($_POST['level']));
-foreach ($stmt as $row) {
-    printr($row) . "<br>";
-}
 //Именованный плейсхолдер
 //$stmt = $pdo->prepare('SELECT name FROM region_stage_1 WHERE level_id = :level_id');
 //$stmt->execute(array('level_id' => $_POST['level']));
