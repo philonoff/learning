@@ -1,31 +1,8 @@
 <?php
+include "news.class.php";
 
-$host = "localhost";
-$db = "News";
-$charset = "UTF8";
-$user = "root";
-$pass = "";
-
-//источник данных database source name
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-//options
-$opt = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-);
-
-$pdo = new PDO($dsn, $user, $pass, $opt);
-
-$id = $_GET['id'];
-
-$stmt = $pdo->prepare('SELECT title, news_text FROM news_list WHERE id = ?');
-$stmt->execute(array($id));
-$row = $stmt->fetch();
-
-$title = $row['title'];
-$text = $row['news_text'];
-
+$title = NewsHandler::getNews()['title'];
+$text = NewsHandler::getNews()['news_text'];
 
 ?>
 
@@ -59,8 +36,8 @@ $text = $row['news_text'];
             <h2><?=(isset($title)) ? $title : "" ?></h2>
             <p style="font-size: 18px;"><?=(isset($text)) ? $text : "" ?></p>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation"><a class='btn btn-default btn-sm' href='editnews.php?id=<?=$id?>'>Редактировать</a></li>
-                <li role="presentation"><a class='btn btn-default btn-sm btn btn-danger' href='deletenews.php?id=<?=$id?>''>Удалить</a></li>
+                <li role="presentation"><a class='btn btn-default btn-sm' href='editnews.php?id=<?=$_GET['id']?>'>Редактировать</a></li>
+                <li role="presentation"><a class='btn btn-default btn-sm btn btn-danger' href='deletenews.php?id=<?=$_GET['id']?>''>Удалить</a></li>
             </ul>
         </div>
     </div>

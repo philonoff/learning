@@ -1,23 +1,7 @@
 <?php
 
-$host = "localhost";
-$db = "News";
-$charset = "UTF8";
-$user = "root";
-$pass = "";
-
-//источник данных database source name
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-//options
-$opt = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-);
-
-$pdo = new PDO($dsn, $user, $pass, $opt);
-
-$stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publication_date DESC");
+include "news.class.php";
+$stmt = NewsHandler::showNews();
 
 ?>
 
@@ -51,7 +35,7 @@ $stmt = $pdo->query("SELECT id, title, news_text FROM news_list ORDER BY publica
             <?php
             if (isset($_GET['msg']) && $_GET['flag'] === "added") {
                 echo "<div class='btn-lg bg-success'>{$_GET['msg']}</div>";
-            } elseif(isset($_GET['msg']) && $_GET['flag'] === "del") {
+            } elseif (isset($_GET['msg']) && $_GET['flag'] === "del") {
                 echo "<div class='btn-lg bg-danger'>{$_GET['msg']}</div>";
             }
             ?>

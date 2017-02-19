@@ -1,52 +1,10 @@
 <?php
-$host = "localhost";
-$db = "News";
-$charset = "UTF8";
-$user = "root";
-$pass = "";
 
-//источник данных database source name
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+include "news.class.php";
+NewsHandler::editNews();
+$title = NewsHandler::getNews()['title'];
+$text = NewsHandler::getNews()['news_text'];
 
-//options
-$opt = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-);
-
-$pdo = new PDO($dsn, $user, $pass, $opt);
-
-$id = $_GET['id'];
-$stmt = $pdo->prepare('SELECT title, news_text FROM news_list WHERE id = ?');
-$stmt->execute([$id]);
-$row = $stmt->fetch();
-
-$title = $row['title'];
-$text = $row['news_text'];
-
-
-function pdoSet($allowed, &$values, $source = array()) {
-    $set = '';
-    $values = array();
-    if (!$source) $source = &$_POST;
-    foreach ($allowed as $field) {
-        if (isset($source[$field])) {
-            $set.="`".str_replace("`","``",$field)."`". "=:$field, ";
-            $values[$field] = $source[$field];
-        }
-    }
-    return substr($set, 0, -2);
-}
-
-if ($_POST['submit']) {
-    $values = array('title' => $_POST['title'], 'news_text' => $_POST['news_text']);
-    $allowed = array("title", "news_text"); // allowed fields
-    $sql = "UPDATE news_list SET ".pdoSet($allowed,$values)." WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $values['id'] = $id;
-    $stmt->execute($values);
-    header("Location: editnews.php?id=$id&msg=Сохранено");
-}
 ?>
 
 <!DOCTYPE html>

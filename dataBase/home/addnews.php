@@ -1,44 +1,8 @@
 <?php
 
-$host = "localhost";
-$db = "News";
-$charset = "UTF8";
-$user = "root";
-$pass = "";
+include "news.class.php";
+NewsHandler::addNews();
 
-//источник данных database source name
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-//options
-$opt = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-);
-
-$pdo = new PDO($dsn, $user, $pass, $opt);
-
-function pdoSet($allowed, &$values, $source = array())
-{
-    $set = '';
-    $values = array();
-    if (!$source) $source = &$_POST;
-    foreach ($allowed as $field) {
-        if (isset($source[$field])) {
-            $set .= "`" . str_replace("`", "``", $field) . "`" . "=:$field, ";
-            $values[$field] = $source[$field];
-        }
-    }
-    return substr($set, 0, -2);
-}
-
-if ($_POST['submit']) {
-    $values = array('title' => $_POST['title'], 'news_text' => $_POST['news_text']);
-    $allowed = ['title', 'news_text']; // allowed fields
-    $sql = "INSERT INTO news_list SET " . pdoSet($allowed, $values);
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($values);
-    header('Location: index.php?msg=Новость добавлена&flag=added');
-}
 ?>
 
 <!DOCTYPE html>
