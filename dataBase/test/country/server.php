@@ -21,7 +21,7 @@ if (isset($_GET['oper'])) {
         $country_class = new Country();
         $result = $country_class->edit($data, "id=".$data['id']);
         if ($result) {
-            header("Location: edit.php?id={$data['id']}");
+            header("Location: index.php");
         }
     }
 }
