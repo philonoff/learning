@@ -1,10 +1,10 @@
 <?php
 
-include "news.class.php";
-NewsHandler::editNews();
-$title = NewsHandler::getNews()['title'];
-$text = NewsHandler::getNews()['news_text'];
+include_once $_SERVER['DOCUMENT_ROOT'] . "/dataBase/home/models/news.class.php";
 
+$news = new News();
+$id = (int)$_GET['id'];
+$news_data = $news->getItemById($id);
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +15,9 @@ $text = NewsHandler::getNews()['news_text'];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Редактировать новость</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../css/jumbotron-narrow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +27,7 @@ $text = NewsHandler::getNews()['news_text'];
         <nav>
             <ul class="nav nav-pills pull-left">
                 <li role="presentation"><a href="index.php">Главная</a></li>
-                <li role="presentation"><a href="addnews.php">Добавить новость</a></li>
+                <li role="presentation"><a href="add.php">Добавить новость</a></li>
             </ul>
         </nav>
     </div>
@@ -40,18 +40,19 @@ $text = NewsHandler::getNews()['news_text'];
             }
             ?>
             <h3>Редактировать новость:</h3>
-            <form action="" method="POST">
+            <form action="server.php?oper=edit" method="POST">
+                <input type="hidden" name="id" value="<?=$news_data['id']?>">
                 <div class="form-group">
                     <label for="title">Заголовок новости</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Заголовок"
-                           value="<?= (isset($title) ? $title : '') ?>">
+                           value="<?=$news_data['title']?>">
                 </div>
                 <div class="form-group">
                     <label for="text">Текст новости</label>
                     <textarea class="form-control" name="news_text" rows="10" id="text" placeholder="Текст новости"
-                              style="resize: none;"><?= (isset($text) ? $text : '') ?></textarea>
+                              style="resize: none;"><?=$news_data['news_text']?></textarea>
                 </div>
-                <input type="submit" name="submit" class="btn btn-default" value="Сохранить">
+                <input type="submit" class="btn btn-default" value="Сохранить">
             </form>
         </div>
     </div>

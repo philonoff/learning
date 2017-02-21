@@ -1,8 +1,9 @@
 <?php
-include "news.class.php";
 
-$title = NewsHandler::getNews()['title'];
-$text = NewsHandler::getNews()['news_text'];
+include_once $_SERVER['DOCUMENT_ROOT'] . "/dataBase/home/models/news.class.php";
+$news = new News();
+$id = (int)$_GET['id'];
+$news_data = $news->getItemById($id);
 
 ?>
 
@@ -14,9 +15,9 @@ $text = NewsHandler::getNews()['news_text'];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Редактировать новость</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../css/jumbotron-narrow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,11 +34,11 @@ $text = NewsHandler::getNews()['news_text'];
 
     <div class="row marketing">
         <div class="col-lg-12">
-            <h2><?=(isset($title)) ? $title : "" ?></h2>
-            <p style="font-size: 18px;"><?=(isset($text)) ? $text : "" ?></p>
+            <h2><?=$news_data['title']?></h2>
+            <p style="font-size: 18px;"><?=$news_data['news_text']?></p>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation"><a class='btn btn-default btn-sm' href='editnews.php?id=<?=$_GET['id']?>'>Редактировать</a></li>
-                <li role="presentation"><a class='btn btn-default btn-sm btn btn-danger' href='deletenews.php?id=<?=$_GET['id']?>''>Удалить</a></li>
+                <li role="presentation"><a class='btn btn-default btn-sm' href='edit.php?id=<?=$news_data['id']?>'>Редактировать</a></li>
+                <li role="presentation"><a class='btn btn-default btn-sm btn btn-danger' href='delete.php?id=<?=$news_data['id']?>''>Удалить</a></li>
             </ul>
         </div>
     </div>

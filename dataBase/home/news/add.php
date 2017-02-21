@@ -1,10 +1,3 @@
-<?php
-
-include "news.class.php";
-NewsHandler::addNews();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +6,9 @@ NewsHandler::addNews();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Добавить новость</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../css/jumbotron-narrow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,7 +18,7 @@ NewsHandler::addNews();
         <nav>
             <ul class="nav nav-pills pull-left">
                 <li role="presentation"><a href="index.php">Главная</a></li>
-                <li role="presentation" class="active"><a href="#">Добавить новость</a></li>
+                <li role="presentation" class="active"><a href="add.php">Добавить новость</a></li>
             </ul>
         </nav>
     </div>
@@ -33,7 +26,7 @@ NewsHandler::addNews();
     <div class="row marketing">
         <div class="col-lg-12">
             <h3>Добавить новость:</h3>
-            <form action="" method="POST">
+            <form action="server.php?oper=add" method="POST">
                 <div class="form-group">
                     <label for="title">Заголовок новости</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Заголовок">
@@ -43,7 +36,7 @@ NewsHandler::addNews();
                     <textarea class="form-control" name="news_text" rows="10" id="text" placeholder="Текст новости"
                               style="resize: none;"></textarea>
                 </div>
-                <input type="submit" name="submit" class="btn btn-default" value="Добавить">
+                <input type="submit" class="btn btn-default" value="Добавить">
             </form>
         </div>
     </div>
