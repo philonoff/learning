@@ -12,5 +12,6 @@ $list = $country_class->getAll();
     <div>
         <?=$country['name']?>
         <a href="edit.php?id=<?=$country['id']?>">Редактировать</a>
+        <a href="delete.php?id=<?=$country['id']?>">Удалить</a>
     </div>
 <?php }?>

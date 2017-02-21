@@ -94,6 +94,16 @@ class DB
         return $stmt->execute($data);
     }
 
+    public function delete($id)
+    {
+        if (isset($id)) {
+            $sql = "DELETE FROM {$this->table_name} WHERE id=" . $id;
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
 }
 
 ?>
