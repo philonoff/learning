@@ -4,11 +4,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/group1-16/project/models/country.class.
 $country_class = new Country;
 $id = (int)$_GET['id'];
 $data_country = $country_class->getItemById($id);
-echo "<pre>";
-print_r($data_country);
-echo "</pre>";
-
-
 ?>
 
 <form method="POST" action="server.php?oper=edit">
