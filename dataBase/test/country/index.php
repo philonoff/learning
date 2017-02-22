@@ -5,7 +5,9 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/dataBase/test/models/country.class.ph
 
 $country_class = new Country();
 $list = $country_class->getAll();
+
 ?>
+
 
 <?php if (Session::has('user')) : ?>
     <div>
@@ -32,6 +34,7 @@ $list = $country_class->getAll();
 <?php endif; ?>
 
 <style>
+
     a {
         display: inline-block;
         padding: 5px 10px;
@@ -47,3 +50,4 @@ $list = $country_class->getAll();
         font-family: Verdana, Verdana, Geneva, sans-serif;
     }
 </style>
+
